@@ -21,14 +21,16 @@ class ListItem extends React.Component {
             <NumberFormat
               value={item.price}
               displayType={'text'}
-              thousandSeparator={true}
+              thousandSeparator='.'
+              decimalSeparator=","
               suffix={' đ'}
               renderText={formattedValue => <Text style ={styles.sub}>Đơn giá: {formattedValue}</Text>}
             />
             <NumberFormat
               value={item.price * item.quantity}
               displayType={'text'}
-              thousandSeparator={true}
+              thousandSeparator='.'
+              decimalSeparator=","
               suffix={' đ'}
               renderText={formattedValue => <Text style ={{fontWeight: 'bold'}}>Thành tiền: {formattedValue}</Text>}
             />
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: '#fff',
     padding: 10,
-    marginVertical: 8,
+    marginVertical: 5,
     marginHorizontal: 8,
     borderRadius: 4,
     shadowColor: "#D3D3CF",

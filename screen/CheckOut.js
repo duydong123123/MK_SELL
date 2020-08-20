@@ -42,7 +42,7 @@ export default class CheckOut extends React.Component{
 			            options={{
 	              		precision: 0,
 			              separator: ' ',
-			              delimiter: ',',
+			              delimiter: '.',
 			              unit: '',
 			              suffixUnit: ''
 			            }}
@@ -64,22 +64,24 @@ export default class CheckOut extends React.Component{
          	<View style={styles.content}>
            	<Text style={styles.text}>Tổng số tiền cần thanh toán:</Text>
            	<NumberFormat
-             value={totalPrice}
-             displayType={'text'}
-             thousandSeparator={true}
-             suffix={' đ'}
-             renderText={formattedValue => <Text style ={styles.moneyRightBlack}>{formattedValue}</Text>}
+              value={totalPrice}
+              displayType={'text'}
+              thousandSeparator='.'
+              decimalSeparator=","
+              suffix={' đ'}
+              renderText={formattedValue => <Text style ={styles.moneyRightBlack}>{formattedValue}</Text>}
            	/>
          	</View>
          	<View style = {styles.phancach}></View>
          	<View style={styles.exchangeContent}>
            	<Text style={styles.text}>Tiền bù lại khách:</Text>
            	<NumberFormat
-             value={this.state.exchange}
-             displayType={'text'}
-             thousandSeparator={true}
-             suffix={' đ'}
-             renderText={formattedValue => <Text style ={styles.moneyRightOrange}>{formattedValue}</Text>}
+              value={this.state.exchange}
+              displayType={'text'}
+            	thousandSeparator='.'
+            	decimalSeparator=","
+              suffix={' đ'}
+              renderText={formattedValue => <Text style ={styles.moneyRightOrange}>{formattedValue}</Text>}
            	/>
         	 </View>
       	 </View>
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
   },
   phancach: {
   	margin: 30,
-  	backgroundColor: "#333",
+  	backgroundColor: "#999",
   	height: 1,
   	width: "80%",
   },
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
   	borderRadius: 5,
   	fontSize: 20,
   	paddingHorizontal: 5,
-  	color: "green",
+  	color: "#28A745",
   	fontWeight: "bold",
   },
   text: {
@@ -141,7 +143,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   moneyRightOrange: {
-  	color: "#ff8000",
+  	color: "#ee4d2d",
   	fontSize: 20,
     fontWeight: "bold",
     textAlign: 'right',

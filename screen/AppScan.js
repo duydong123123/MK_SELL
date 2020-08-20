@@ -190,7 +190,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const DATA = [
 {
-  barCode: ']C1AMA00109KCO00W001000',
+  barCode: '640509040147',
   itemName: 'First Item',
   price: 12000,
   quantity: 1
@@ -207,6 +207,19 @@ const DATA = [
   price: 20000,
   quantity: 1
 },
+{
+  barCode: '725272730706',
+  itemName: 'Fourth Item',
+  price: 40000,
+  quantity: 1
+},
+{
+  barCode: '3033710076789',
+  itemName: 'Fifth Item',
+  price: 50000,
+  quantity: 1
+},
+
 ];
 
 export default class AppScan extends React.Component{

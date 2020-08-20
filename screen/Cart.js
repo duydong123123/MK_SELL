@@ -54,7 +54,7 @@ class Cart extends React.Component {
     return (
       <ImageBackground source={BackgroundImg} style={styles.bgimg}>
         <View style={{flex:1, justifyContent:"space-between"}}>
-          <FlatList
+          <FlatList style={{marginVertical: 10}}
             data={this.state.products.filter(({ quantity }) => quantity)}
             renderItem={({item, index}) => <ListItem
                                              item = {item}
@@ -70,7 +70,8 @@ class Cart extends React.Component {
               <NumberFormat
                 value={totalPrice}
                 displayType={'text'}
-                thousandSeparator={true}
+                thousandSeparator='.'
+                decimalSeparator=","
                 suffix={' đ'}
                 renderText={formattedValue => <Text style ={styles.ttPriceText}>{formattedValue}</Text>}
               />
