@@ -1,0 +1,2 @@
+-Delete yarn.lock file
+-Install node modules: yarn install --save
