@@ -1,19 +1,11 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity, Image, AsyncStorage, ImageBackground } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Text, View, StyleSheet, TouchableOpacity, Image, AsyncStorage, ImageBackground } from 'react-native';
 import ScanImg from '../icon/scan.png';
 import UpdateImg from '../icon/update.png';
 import BackgroundImg from '../img/bg.jpg';
 
-// products=[];
 
 class HomeScreen extends React.Component{
-  // componentDidMount() {
-  //   AsyncStorage.setItem('cart', null);
-  // }
-
   reset = async () => {
     try {
       await AsyncStorage.setItem('cart', '');
@@ -29,12 +21,12 @@ class HomeScreen extends React.Component{
         <View style={styles.container}>
             <TouchableOpacity style = {styles.btn} onPress={() => {this.reset(); navigation.navigate('AppScan')}}>
                 <Image style = {{width: 64, height: 64}} source = {ScanImg} />
-                <Text style = {{fontSize: 20, color: '#ff7f50', fontWeight: "bold"}}>Quét mã</Text>
+                <Text style = {{fontSize: 20, color: '#FC5B31', fontWeight: "bold"}}>Quét mã</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style = {styles.btn} onPress={() => navigation.navigate('Update')}>
                 <Image style = {{width: 64, height: 64}} source = {UpdateImg} />
-                <Text style = {{fontSize: 20, color: '#ff7f50', fontWeight: "bold"}}>Thêm/Cập nhật giá</Text>
+                <Text style = {{fontSize: 20, color: '#FC5B31', fontWeight: "bold"}}>Thêm/Cập nhật giá</Text>
             </TouchableOpacity>
         </View>
       </ImageBackground>

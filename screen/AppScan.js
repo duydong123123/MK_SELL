@@ -185,8 +185,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Button, AsyncStorage, Alert } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo-barcode-scanner';
-import { NavigationContainer  } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 const DATA = [
 {
@@ -227,7 +225,6 @@ export default class AppScan extends React.Component{
     super(props);
     this.state = {
       hasPermission: null,
-      setHasPermission: null,
       numberCompare: 0,
       scanned: false,
     };
@@ -237,7 +234,7 @@ export default class AppScan extends React.Component{
     async () => {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
       this.setState({
-        hasCameraPermission: status === 'granted',
+        hasPermission: status === 'granted',
       });
     };
   }

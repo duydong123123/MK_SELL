@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import BackgroundImg from '../img/bg.jpg';
 
 // products=[];

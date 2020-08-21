@@ -1,7 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity, Image, SafeAreaView, FlatList, StatusBar, AsyncStorage, ImageBackground } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Text, View, StyleSheet, Button, TouchableOpacity, Image, FlatList, AsyncStorage, ImageBackground } from 'react-native';
 import ListItem from './ListItem';
 import ScanMoreIcon from '../icon/view_add.png';
 import NumberFormat from 'react-number-format';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity, Image, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 
 // products=[];
 

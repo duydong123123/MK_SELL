@@ -1,8 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity, Image, StatusBar } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Text, View, StyleSheet, TouchableOpacity, Image, StatusBar } from 'react-native';
 import PlusIcon from '../icon/plus.png';
 import MinusIcon from '../icon/minus.png';
 import NumberFormat from 'react-number-format';
