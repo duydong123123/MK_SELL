@@ -9,6 +9,7 @@ import ScanToUpdate from './ScanToUpdate';
 import Cart from './Cart';
 import SetPrice from './SetPrice';
 import CheckOut from './CheckOut';
+import EditItem from './EditItem';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ class AppNavigator extends React.Component {
           <Stack.Screen name="AppScan" component={AppScan} options={{title: "Quét mã"}}/>
           <Stack.Screen name="ScanMore" component={ScanMore} options={{title: "Thêm"}}/>
           <Stack.Screen name="SetPrice" component={SetPrice} options={{title: "Thêm/Cập nhật giá"}}/>
+          <Stack.Screen name="EditItem" component={EditItem} options={{title: "Cập nhật"}}/>
           <Stack.Screen name="ScanToUpdate" component={ScanToUpdate} options={{title: "Quét mã"}}/>
           <Stack.Screen name="Cart" component={Cart} options={{title: "Giỏ hàng"}}/>
           <Stack.Screen name="CheckOut" component={CheckOut} options={{title: "Thanh toán"}}/>

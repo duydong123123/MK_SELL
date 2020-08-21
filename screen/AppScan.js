@@ -208,7 +208,6 @@ export default class AppScan extends React.Component{
     AsyncStorage.getItem('DATA').then((theDATA)=>{
       const data = JSON.parse(theDATA);
       this.setState({DATA:data});
-      console.log(this.state.DATA);
     })
     .catch((err)=>{
       console.log(err);

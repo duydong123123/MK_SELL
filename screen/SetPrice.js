@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, FlatList, AsyncStorage, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, FlatList, AsyncStorage, TextInput, Alert } from 'react-native';
 import BackgroundImg from '../img/bg.jpg';
 import SearchIcon from '../icon/search-icon.png';
 import NumberFormat from 'react-number-format';
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 export default class SetPrice extends React.Component{
   constructor(props) {
@@ -11,6 +12,29 @@ export default class SetPrice extends React.Component{
       DATA: [],
       searchKey: "",
     };
+  }
+
+  pressDelete = (item) => {
+    Alert.alert(
+      "Xác nhận xoá!",
+      `Xoá ${item.itemName} ra khỏi danh sách?`,
+      [
+        { text: "Xoá", onPress: () => {
+          let updateDATA = this.state.DATA.filter((thisItem) => thisItem.barCode != item.barCode);
+          AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
+          showMessage({
+            message: "Đã xoá một sản phẩm!",
+            type: "danger",
+          });
+          this.props.navigation.reset({
+            index: 1,
+            routes: [{ name: 'Home' }, {name: "SetPrice"}],
+          });
+        } },
+        { text: "Không", onPress: () => {}}
+      ],
+      { cancelable: false }
+    );
   }
 
   componentDidMount(){
@@ -46,18 +70,23 @@ export default class SetPrice extends React.Component{
           <FlatList style={{margin: 10}}
             data={this.state.DATA}
             renderItem={({item, index}) => (
-              <TouchableOpacity style={styles.item}>
-                <Text style={styles.title}>{item.itemName}</Text>
-                <Text style={styles.sub}>Mã vạch: {item.barCode}</Text>
-                <NumberFormat
-                  value={item.price}
-                  displayType={'text'}
-                  thousandSeparator='.'
-                  decimalSeparator=","
-                  suffix={' đ'}
-                  renderText={formattedValue => <Text style ={styles.sub}>Đơn giá: {formattedValue}</Text>}
-                />
-              </TouchableOpacity>
+              <View style={styles.item}>
+                <TouchableOpacity style={{flex: 1}} onPress={()=>{navigation.navigate("EditItem",{ item, index })}}>
+                  <Text style={styles.title}>{item.itemName}</Text>
+                  <Text style={styles.sub}>Mã vạch: {item.barCode}</Text>
+                  <NumberFormat
+                    value={item.price}
+                    displayType={'text'}
+                    thousandSeparator='.'
+                    decimalSeparator=","
+                    suffix={' đ'}
+                    renderText={formattedValue => <Text style ={styles.sub}>Đơn giá: {formattedValue}</Text>}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.delete} onPress={()=>{this.pressDelete(item)}}>
+                  <Text style={{ padding: 10, fontSize: 15, color: "white"}}>Xoá</Text>
+                </TouchableOpacity>
+              </View>
             )}
             keyExtractor={item => item.barCode}
           />
@@ -73,7 +102,8 @@ const styles = StyleSheet.create({
   },
   top: {
     flexDirection: "row",
-    margin: 8,
+    marginTop: 8,
+    marginHorizontal: 8,
   },
   inputSearch: {
     height: 44,
@@ -92,6 +122,8 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   item: {
+    flex: 1,
+    flexDirection: 'row',
     backgroundColor: '#fff',
     padding: 10,
     marginVertical: 5,
@@ -111,6 +143,12 @@ const styles = StyleSheet.create({
   },
   sub: {
     fontSize: 14,
+  },
+  delete: {
+    backgroundColor: '#ee4d2d',
+    borderRadius: 5,
+    justifyContent: 'center',
+    marginVertical: 8,
   },
 });
 
