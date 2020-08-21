@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
-class Update extends React.Component{
+export default class ScanToUpdate extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -24,5 +24,3 @@ class Update extends React.Component{
 }
 
 
-
-export default Update;

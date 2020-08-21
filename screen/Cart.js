@@ -38,7 +38,7 @@ class Cart extends React.Component {
       this.setState({products:products});
     })
     .catch((err)=>{
-      alert(err)
+      console.log(err);
     });
   }
 

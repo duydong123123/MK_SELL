@@ -2,14 +2,10 @@ import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import BackgroundImg from '../img/bg.jpg';
 
-// products=[];
-
 export default class New_Screen extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      // products: [],
-      // number: 1,
     };
   }
   render(){

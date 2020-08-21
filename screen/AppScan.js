@@ -186,39 +186,6 @@ import React from 'react';
 import { Text, View, StyleSheet, Button, AsyncStorage, Alert } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo-barcode-scanner';
 
-const DATA = [
-{
-  barCode: '640509040147',
-  itemName: 'First Item',
-  price: 12000,
-  quantity: 1
-},
-{
-  barCode: '5901234123457',
-  itemName: 'Second Item',
-  price: 200000,
-  quantity: 1
-},
-{
-  barCode: '5012345678900',
-  itemName: 'Third Item',
-  price: 20000,
-  quantity: 1
-},
-{
-  barCode: '725272730706',
-  itemName: 'Fourth Item',
-  price: 40000,
-  quantity: 1
-},
-{
-  barCode: '3033710076789',
-  itemName: 'Fifth Item',
-  price: 50000,
-  quantity: 1
-},
-
-];
 
 export default class AppScan extends React.Component{
   constructor(props) {
@@ -227,6 +194,7 @@ export default class AppScan extends React.Component{
       hasPermission: null,
       numberCompare: 0,
       scanned: false,
+      DATA: []
     };
   }
 
@@ -237,6 +205,14 @@ export default class AppScan extends React.Component{
         hasPermission: status === 'granted',
       });
     };
+    AsyncStorage.getItem('DATA').then((theDATA)=>{
+      const data = JSON.parse(theDATA);
+      this.setState({DATA:data});
+      console.log(this.state.DATA);
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
   }
 
   _alertSame = (name) => {
@@ -272,6 +248,7 @@ export default class AppScan extends React.Component{
     );
   }
   render(){
+
     const { navigation, route } = this.props;
     return (
       <View
@@ -285,11 +262,11 @@ export default class AppScan extends React.Component{
         this.setState({
           scanned: true
         });
-        let _strDATA = JSON.stringify(DATA);
+        let _strDATA = JSON.stringify(this.state.DATA);
         if (_strDATA.includes(data) == false){
           this._alertNoData(data);
         }
-        for(let i of DATA){
+        for(let i of this.state.DATA){
           if (data == i.barCode) {
             AsyncStorage.getItem('cart').then((datacart)=>{
               if (datacart == null){
