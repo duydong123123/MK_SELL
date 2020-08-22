@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <AppNavigator/>
-        <FlashMessage position="top" />
+        <FlashMessage position="top" duration={3000}/>
       </View>
     );
   }
