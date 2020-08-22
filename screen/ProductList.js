@@ -14,6 +14,19 @@ export default class ProductList extends React.Component{
     };
   }
 
+  pressSearch = () => {
+    AsyncStorage.getItem('DATA').then((theDATA)=>{
+      let data = JSON.parse(theDATA);
+      let filterDATA = data.filter(item => (item.barCode.includes(this.state.searchKey) || item.itemName.toLowerCase().includes(this.state.searchKey.toLowerCase())));
+      this.setState({DATA:filterDATA});
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+
+
+  }
+
   pressDelete = (item) => {
     Alert.alert(
       "Xác nhận xoá!",
@@ -39,7 +52,7 @@ export default class ProductList extends React.Component{
 
   componentDidMount(){
     AsyncStorage.getItem('DATA').then((theDATA)=>{
-      const data = JSON.parse(theDATA);
+      let data = JSON.parse(theDATA);
       this.setState({DATA:data});
     })
     .catch((err)=>{
@@ -59,7 +72,7 @@ export default class ProductList extends React.Component{
                 onChangeText={text => this.setState({searchKey: text})}
                 defaultValue={this.state.searchKey}
               />
-              <TouchableOpacity style={styles.searchBtn}>
+              <TouchableOpacity style={styles.searchBtn} onPress={()=>{this.pressSearch()}}>
                 <Image style = {{width: 32, height: 32,}} source = {SearchIcon} />
               </TouchableOpacity>
             </View>
