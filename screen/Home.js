@@ -4,40 +4,40 @@ import ScanImg from '../icon/scan.png';
 import UpdateImg from '../icon/update.png';
 import BackgroundImg from '../img/bg.jpg';
 
-const DATA = [
-{
-  barCode: '640509040147',
-  itemName: 'First Item',
-  price: 12000,
-  quantity: 1
-},
-{
-  barCode: '5901234123457',
-  itemName: 'Second Item',
-  price: 200000,
-  quantity: 1
-},
-{
-  barCode: '5012345678900',
-  itemName: 'Third Item',
-  price: 20000,
-  quantity: 1
-},
-{
-  barCode: '725272730706',
-  itemName: 'Fourth Item',
-  price: 40000,
-  quantity: 1
-},
-{
-  barCode: '3033710076789',
-  itemName: 'Fifth Item',
-  price: 50000,
-  quantity: 1
-},
+// const DATA = [
+// {
+//   barCode: '640509040147',
+//   itemName: 'First Item',
+//   price: 12000,
+//   quantity: 1
+// },
+// {
+//   barCode: '5901234123457',
+//   itemName: 'Second Item',
+//   price: 200000,
+//   quantity: 1
+// },
+// {
+//   barCode: '5012345678900',
+//   itemName: 'Third Item',
+//   price: 20000,
+//   quantity: 1
+// },
+// {
+//   barCode: '725272730706',
+//   itemName: 'Fourth Item',
+//   price: 40000,
+//   quantity: 1
+// },
+// {
+//   barCode: '3033710076789',
+//   itemName: 'Fifth Item',
+//   price: 50000,
+//   quantity: 1
+// },
 
-];
-AsyncStorage.setItem('DATA',JSON.stringify(DATA));
+// ];
+// AsyncStorage.setItem('DATA',JSON.stringify(DATA));
 
 class HomeScreen extends React.Component{
   reset = async () => {

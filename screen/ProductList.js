@@ -76,7 +76,7 @@ export default class ProductList extends React.Component{
                 <Image style = {{width: 32, height: 32,}} source = {SearchIcon} />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={{backgroundColor: "#2196F3", borderRadius: 5}}>
+            <TouchableOpacity style={{backgroundColor: "#2196F3", borderRadius: 5}} onPress={()=>{navigation.navigate("ScanToUpdate")}}>
               <Text style={{color: "white", fontSize: 20, padding: 5,}}>Quét mã</Text>
             </TouchableOpacity>
           </View>

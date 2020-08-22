@@ -233,7 +233,7 @@ export default class AppScan extends React.Component{
   _alertNoData = (barcode) => {
     Alert.alert(
       "Ố ồ, cái này lạ lắm à nghen!",
-      `Barcode ${barcode} chưa có trong danh sách, cập nhật giá ngay?`,
+      `Mã vạch ${barcode} chưa có trong danh sách, cập nhật giá ngay?`,
       [
         { text: "Cập nhật", onPress: () => {
           this.props.navigation.replace("SetPrice");
