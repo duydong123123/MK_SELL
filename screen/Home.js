@@ -58,7 +58,7 @@ class HomeScreen extends React.Component{
                 <Text style = {{fontSize: 20, color: '#FC5B31', fontWeight: "bold"}}>Quét mã</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style = {styles.btn} onPress={() => navigation.navigate('SetPrice')}>
+            <TouchableOpacity style = {styles.btn} onPress={() => navigation.navigate('ProductList')}>
                 <Image style = {{width: 64, height: 64}} source = {UpdateImg} />
                 <Text style = {{fontSize: 20, color: '#FC5B31', fontWeight: "bold"}}>Thêm/Cập nhật giá</Text>
             </TouchableOpacity>

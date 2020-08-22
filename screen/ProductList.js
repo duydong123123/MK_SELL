@@ -5,7 +5,7 @@ import SearchIcon from '../icon/search-icon.png';
 import NumberFormat from 'react-number-format';
 import { showMessage, hideMessage } from "react-native-flash-message";
 
-export default class SetPrice extends React.Component{
+export default class ProductList extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +28,7 @@ export default class SetPrice extends React.Component{
           });
           this.props.navigation.reset({
             index: 1,
-            routes: [{ name: 'Home' }, {name: "SetPrice"}],
+            routes: [{ name: 'Home' }, {name: "ProductList"}],
           });
         } },
         { text: "Không", onPress: () => {}}
@@ -59,7 +59,7 @@ export default class SetPrice extends React.Component{
                 onChangeText={text => this.setState({searchKey: text})}
                 defaultValue={this.state.searchKey}
               />
-              <TouchableOpacity style={{justifyContent: "center", backgroundColor: "#f9f9f9", borderRadius: 20, padding: 5, marginHorizontal: 2}}>
+              <TouchableOpacity style={styles.searchBtn}>
                 <Image style = {{width: 32, height: 32,}} source = {SearchIcon} />
               </TouchableOpacity>
             </View>
@@ -116,10 +116,17 @@ const styles = StyleSheet.create({
     fontSize: 17,
     padding: 2,
   },
+  searchBtn: {
+    justifyContent: "center",
+    backgroundColor: "#f9f9f9",
+    borderRadius: 20,
+    padding: 5,
+    marginHorizontal: 2,
+  },
   bgimg: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   item: {
     flex: 1,

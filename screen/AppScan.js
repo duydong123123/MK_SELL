@@ -184,7 +184,8 @@
 
 import React from 'react';
 import { Text, View, StyleSheet, Button, AsyncStorage, Alert } from 'react-native';
-import { BarCodeScanner, Permissions } from 'expo-barcode-scanner';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as Permissions from 'expo-permissions';
 
 
 export default class AppScan extends React.Component{

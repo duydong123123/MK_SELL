@@ -83,7 +83,7 @@ export default class EditItem extends React.Component{
     }
     this.props.navigation.reset({
       index: 1,
-      routes: [{ name: 'Home' }, {name: "SetPrice"}],
+      routes: [{ name: 'Home' }, {name: "ProductList"}],
     });
   }
 
