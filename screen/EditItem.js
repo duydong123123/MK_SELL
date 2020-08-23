@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput, AsyncStorage } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput, AsyncStorage, KeyboardAvoidingView, Platform } from 'react-native';
 import BackgroundImg from '../img/bg.jpg';
 import { TextInputMask } from 'react-native-masked-text';
 import { showMessage, hideMessage } from "react-native-flash-message";
@@ -101,7 +101,7 @@ export default class EditItem extends React.Component{
     const { navigation } = this.props;
     return (
       <ImageBackground source={BackgroundImg} style={styles.bgimg}>
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.container}>
           <View>
             <View style={styles.content}>
               <Text style={styles.text}>Mã vạch:</Text>
@@ -147,7 +147,7 @@ export default class EditItem extends React.Component{
             <Text style={{ padding: 20, fontSize: 20, fontWeight: "bold", color: "white"}}>Hoàn thành</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </ImageBackground>
     );
   }
