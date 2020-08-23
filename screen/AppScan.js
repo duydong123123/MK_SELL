@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Button, AsyncStorage, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Permissions from 'expo-permissions';
+import { CommonActions } from '@react-navigation/native';
 
 
 export default class AppScan extends React.Component{
@@ -91,21 +92,40 @@ export default class AppScan extends React.Component{
                   const cart  = [];
                   cart.push(i);
                   AsyncStorage.setItem('cart',JSON.stringify(cart));
-                  navigation.reset({
-                      index: 0,
-                      routes: [{ name: 'Home' }],
-                  });
-                  navigation.navigate("Cart");
+                  // navigation.reset({
+                  //     index: 0,
+                  //     routes: [{ name: 'Home' }],
+                  // });
+                  // navigation.navigate("Cart");
+                  //
+                  navigation.dispatch(
+                    CommonActions.reset({
+                      index: 1,
+                      routes: [
+                        { name: 'Home' },
+                        { name: 'Cart' },
+                      ],
+                    })
+                  );
                 }
                 else if (datacart.includes(data) == false) {
                   const cart = JSON.parse(datacart);
                   cart.push(i);
                   AsyncStorage.setItem('cart',JSON.stringify(cart));
-                  navigation.reset({
-                      index: 0,
-                      routes: [{ name: 'Home' }],
-                  });
-                  navigation.navigate("Cart");
+                  // navigation.reset({
+                  //     index: 0,
+                  //     routes: [{ name: 'Home' }],
+                  // });
+                  // navigation.navigate("Cart");
+                  navigation.dispatch(
+                    CommonActions.reset({
+                      index: 1,
+                      routes: [
+                        { name: 'Home' },
+                        { name: 'Cart' },
+                      ],
+                    })
+                  );
                 }
                 else {
                   this._alertSame(i.itemName);

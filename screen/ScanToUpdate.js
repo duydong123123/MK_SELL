@@ -68,8 +68,6 @@ export default class AppScan extends React.Component{
     );
   }
   render(){
-
-    const { navigation, route } = this.props;
     return (
       <View
       style={{

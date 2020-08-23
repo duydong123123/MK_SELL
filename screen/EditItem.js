@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, TextI
 import BackgroundImg from '../img/bg.jpg';
 import { TextInputMask } from 'react-native-masked-text';
 import { showMessage, hideMessage } from "react-native-flash-message";
+import { CommonActions } from '@react-navigation/native';
 
 export default class EditItem extends React.Component{
   constructor(props) {
@@ -81,10 +82,20 @@ export default class EditItem extends React.Component{
         type: "info",
       });
     }
-    this.props.navigation.reset({
-      index: 1,
-      routes: [{ name: 'Home' }, {name: "ProductList"}],
-    });
+    // this.props.navigation.reset({
+    //   index: 1,
+    //   routes: [{ name: 'Home' }, {name: "ProductList"}],
+    // });
+
+    this.props.navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          { name: 'Home' },
+          { name: 'ProductList' },
+        ],
+      })
+    );
   }
 
   componentDidMount() {
@@ -133,7 +144,7 @@ export default class EditItem extends React.Component{
                 value={this.state._price}
                 onChangeText={text => {
                   this.setState({
-                    _price: text,
+                    _price: parseInt(text.replace(/[^0-9]/g, '')),
                   });
                 }}
                 style={styles.tInput}

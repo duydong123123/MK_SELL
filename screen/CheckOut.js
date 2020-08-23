@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Button, TouchableOpacity, Image, ImageBackgroun
 import NumberFormat from 'react-number-format';
 import BackgroundImg from '../img/bg.jpg';
 import { TextInputMask } from 'react-native-masked-text';
+import { CommonActions } from '@react-navigation/native';
 
 // products=[];
 
@@ -92,11 +93,20 @@ export default class CheckOut extends React.Component{
 							<TouchableOpacity
 								style={{backgroundColor: '#85CA55', borderRadius: 20}}
 								onPress={()=>{
-									navigation.reset({
-		                index: 0,
-		                routes: [{ name: 'Home' }],
-	                });}
-								}
+									// navigation.reset({
+		       //          index: 0,
+		       //          routes: [{ name: 'Home' }],
+	        //         });
+
+	                navigation.dispatch(
+                    CommonActions.reset({
+                      index: 0,
+                      routes: [
+                        { name: 'Home' },
+                      ],
+                    })
+                  );
+								}}
 	            >
 							<Text style={{ padding: 20, fontSize: 20, fontWeight: "bold", color: "white"}}>Hoàn thành</Text>
 							</TouchableOpacity>
