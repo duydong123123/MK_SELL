@@ -37,7 +37,7 @@ export default class EditItem extends React.Component{
         });
       }
       else{
-        if (new_Item.barCode == this.props.route.params.item.barCode && new_Item.itemName == this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
+        if (new_Item.itemName == this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
           let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
           let updateDATA = [...afterRemoveItem,new_Item];
           AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
@@ -46,7 +46,7 @@ export default class EditItem extends React.Component{
             type: "info",
           });
         }
-        if (new_Item.barCode == this.props.route.params.item.barCode && new_Item.itemName != this.props.route.params.item.itemName && new_Item.price == this.props.route.params.item.price){
+        if (new_Item.itemName != this.props.route.params.item.itemName && new_Item.price == this.props.route.params.item.price){
           let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
           let updateDATA = [...afterRemoveItem,new_Item];
           AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
@@ -55,7 +55,7 @@ export default class EditItem extends React.Component{
             type: "info",
           });
         }
-        if (new_Item.barCode == this.props.route.params.item.barCode && new_Item.itemName != this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
+        if (new_Item.itemName != this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
           let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
           let updateDATA = [...afterRemoveItem,new_Item];
           AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
@@ -66,16 +66,53 @@ export default class EditItem extends React.Component{
         }
       }
     }
-
-    this.props.navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [
-          { name: 'Home' },
-          { name: 'ProductList' },
-        ],
+    let check_ProductList = this.props.navigation.dangerouslyGetState().routes.filter(item => (item.name == "ProductList"));
+    if(check_ProductList.length){
+      this.props.navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            { name: 'Home' },
+            { name: 'ProductList' },
+          ],
+        })
+      );
+    }
+    else{
+      AsyncStorage.getItem('cart').then((datacart)=>{
+        if (datacart == null){
+          const cart  = [];
+          cart.push(new_Item);
+          AsyncStorage.setItem('cart',JSON.stringify(cart));
+          this.props.navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [
+                { name: 'Home' },
+                { name: 'Cart' },
+              ],
+            })
+          );
+        }
+        else{
+          const cart = JSON.parse(datacart);
+          cart.push(new_Item);
+          AsyncStorage.setItem('cart',JSON.stringify(cart));
+          this.props.navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [
+                { name: 'Home' },
+                { name: 'Cart' },
+              ],
+            })
+          );
+        }
       })
-    );
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
   }
 
   componentDidMount() {
