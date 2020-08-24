@@ -18,74 +18,54 @@ export default class EditItem extends React.Component{
 
   pressDone = () => {
     let new_Item = {barCode: this.state._barcode, itemName: this.state._name, price: this.state._price, quantity: 1};
-    let _strDATA = JSON.stringify(this.state.DATA);
-    if (_strDATA.includes(JSON.stringify(new_Item)) == false){
-      let updateDATA = [...this.state.DATA,new_Item];
+    if (this.state.DATA == null){
+      let updateDATA = [new_Item];
       AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
       showMessage({
         message: "Đã thêm một sản phẩm mới!",
         type: "success",
       });
     }
-    if (new_Item.barCode == this.props.route.params.item.barCode && new_Item.itemName == this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
-      let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
-      let updateDATA = [...afterRemoveItem,new_Item];
-      AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
-      showMessage({
-        message: `Thay đổi giá sản phẩm: ${this.props.route.params.item.itemName}`,
-        type: "info",
-      });
+    else {
+      let _strDATA = JSON.stringify(this.state.DATA);
+      if (_strDATA.includes(JSON.stringify(new_Item.barCode)) == false){
+        let updateDATA = [...this.state.DATA,new_Item];
+        AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
+        showMessage({
+          message: "Đã thêm một sản phẩm mới!",
+          type: "success",
+        });
+      }
+      else{
+        if (new_Item.barCode == this.props.route.params.item.barCode && new_Item.itemName == this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
+          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
+          let updateDATA = [...afterRemoveItem,new_Item];
+          AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
+          showMessage({
+            message: `Thay đổi giá sản phẩm: ${this.props.route.params.item.itemName}`,
+            type: "info",
+          });
+        }
+        if (new_Item.barCode == this.props.route.params.item.barCode && new_Item.itemName != this.props.route.params.item.itemName && new_Item.price == this.props.route.params.item.price){
+          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
+          let updateDATA = [...afterRemoveItem,new_Item];
+          AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
+          showMessage({
+            message: `Thay đổi tên sản phẩm: ${this.props.route.params.item.itemName} -> ${new_Item.itemName}`,
+            type: "info",
+          });
+        }
+        if (new_Item.barCode == this.props.route.params.item.barCode && new_Item.itemName != this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
+          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
+          let updateDATA = [...afterRemoveItem,new_Item];
+          AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
+          showMessage({
+            message: `Thay đổi tên và giá sản phẩm`,
+            type: "info",
+          });
+        }
+      }
     }
-    if (new_Item.barCode == this.props.route.params.item.barCode && new_Item.itemName != this.props.route.params.item.itemName && new_Item.price == this.props.route.params.item.price){
-      let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
-      let updateDATA = [...afterRemoveItem,new_Item];
-      AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
-      showMessage({
-        message: `Thay đổi tên sản phẩm: ${this.props.route.params.item.itemName} -> ${new_Item.itemName}`,
-        type: "info",
-      });
-    }
-    if (new_Item.barCode == this.props.route.params.item.barCode && new_Item.itemName != this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
-      let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
-      let updateDATA = [...afterRemoveItem,new_Item];
-      AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
-      showMessage({
-        message: `Thay đổi tên và giá sản phẩm`,
-        type: "info",
-      });
-    }
-    if (new_Item.barCode != this.props.route.params.item.barCode && new_Item.itemName == this.props.route.params.item.itemName && new_Item.price == this.props.route.params.item.price){
-      this.state.DATA.splice(this.props.route.params.index, 1);
-      let updateDATA = [...this.state.DATA,new_Item];
-      console.log(this.state.DATA);
-      AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
-      showMessage({
-        message: `Thay đổi mã vạch sản phẩm: ${this.props.route.params.item.itemName}`,
-        type: "info",
-      });
-    }
-    if (new_Item.barCode != this.props.route.params.item.barCode && new_Item.itemName == this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
-      this.state.DATA.splice(this.props.route.params.index, 1);
-      let updateDATA = [...this.state.DATA,new_Item];
-      AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
-      showMessage({
-        message: `Thay đổi mã vạch và giá sản phẩm: ${this.props.route.params.item.itemName}`,
-        type: "info",
-      });
-    }
-    if (new_Item.barCode != this.props.route.params.item.barCode && new_Item.itemName != this.props.route.params.item.itemName && new_Item.price == this.props.route.params.item.price){
-      this.state.DATA.splice(this.props.route.params.index, 1);
-      let updateDATA = [...this.state.DATA,new_Item];
-      AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
-      showMessage({
-        message: `Thay đổi mã vạch và tên sản phẩm: ${this.props.route.params.item.itemName}`,
-        type: "info",
-      });
-    }
-    // this.props.navigation.reset({
-    //   index: 1,
-    //   routes: [{ name: 'Home' }, {name: "ProductList"}],
-    // });
 
     this.props.navigation.dispatch(
       CommonActions.reset({
@@ -114,13 +94,9 @@ export default class EditItem extends React.Component{
       <ImageBackground source={BackgroundImg} style={styles.bgimg}>
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.container}>
           <View>
-            <View style={styles.content}>
+            <View style={styles.contentCenter}>
               <Text style={styles.text}>Mã vạch:</Text>
-              <TextInput
-                style={styles.tInput}
-                onChangeText={text => this.setState({_barcode: text})}
-                defaultValue={this.state._barcode}
-              />
+              <Text style={styles.tBarcode}>{this.state._barcode}</Text>
             </View>
             <View style={styles.content}>
               <Text style={styles.text}>Tên sản phẩm:</Text>
@@ -182,6 +158,10 @@ const styles = StyleSheet.create({
   content: {
     margin: 8,
   },
+    contentCenter: {
+    margin: 8,
+    alignItems: "center",
+  },
   text:{
     fontSize: 18,
     marginHorizontal: 20,
@@ -197,6 +177,10 @@ const styles = StyleSheet.create({
     fontSize: 17,
     padding: 5,
     marginHorizontal: 10,
+    fontWeight: "bold",
+  },
+    tBarcode: {
+    fontSize: 20,
     fontWeight: "bold",
   },
 });
