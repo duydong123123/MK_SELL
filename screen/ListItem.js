@@ -5,7 +5,7 @@ import MinusIcon from '../icon/minus.png';
 import NumberFormat from 'react-number-format';
 
 
-class ListItem extends React.Component {
+export default class ListItem extends React.Component {
   render(){
     const {item} = this.props;
     return (
@@ -13,8 +13,6 @@ class ListItem extends React.Component {
         <View style = {{flexDirection: "row", justifyContent: "space-between"}}>
           <View>
             <Text style={styles.title}>{item.itemName}</Text>
-{/*            <Text style={styles.sub}>Đơn giá: {item.price}</Text>
-            <Text style={{fontWeight: "bold"}}>Thành tiền: {item.price * item.quantity}</Text>*/}
             <NumberFormat
               value={item.price}
               displayType={'text'}
@@ -78,5 +76,3 @@ const styles = StyleSheet.create({
   }
 });
 
-
-export default ListItem;

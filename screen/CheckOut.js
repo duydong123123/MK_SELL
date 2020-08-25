@@ -1,11 +1,9 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity, Image, ImageBackground, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, } from 'react-native';
 import NumberFormat from 'react-number-format';
 import BackgroundImg from '../img/bg.jpg';
 import { TextInputMask } from 'react-native-masked-text';
 import { CommonActions } from '@react-navigation/native';
-
-// products=[];
 
 export default class CheckOut extends React.Component{
   constructor(props) {
@@ -20,7 +18,6 @@ export default class CheckOut extends React.Component{
   _getInput = () => {
     let getPrice = parseInt(this.state.value.replace(/[^0-9]/g, ''));
     this.setState({pressOK: true, exchange: getPrice - this.props.route.params.totalPrice});
-    // alert (`Tiền bù lại khách: ${getPrice - this.props.route.params.totalPrice}`)
   }
   render(){
     const { navigation, route } = this.props;
@@ -32,13 +29,6 @@ export default class CheckOut extends React.Component{
 						<View style={styles.content}>
 						 	<Text style={styles.text}>Số tiền nhận từ khách: </Text>
 						 	<View style={styles.inputAndGet}>
-						{/*             	<TextInput
-						     style={styles.textInput}
-						     keyboardType = 'number-pad'
-						     onChangeText = {(text)=> this.setState({value: text})}
-						     value = {this.state.value}
-						   	/>*/}
-
 								<View style={{flexDirection: 'row'}}>
 									<TextInputMask
 				            type={'money'}
@@ -93,11 +83,6 @@ export default class CheckOut extends React.Component{
 							<TouchableOpacity
 								style={{backgroundColor: '#85CA55', borderRadius: 20}}
 								onPress={()=>{
-									// navigation.reset({
-		       //          index: 0,
-		       //          routes: [{ name: 'Home' }],
-	        //         });
-
 	                navigation.dispatch(
                     CommonActions.reset({
                       index: 0,
@@ -145,7 +130,6 @@ const styles = StyleSheet.create({
   exchangeContent: {
   	marginTop: 20,
   	marginHorizontal: 10,
-    // marginTop: 50,
   },
   inputAndGet: {
   	marginTop: 5,

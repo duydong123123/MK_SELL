@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     fontWeight: "bold",
   },
-    tBarcode: {
+  tBarcode: {
     fontSize: 20,
     fontWeight: "bold",
   },

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, AsyncStorage, Alert } from 'react-native';
+import { View, StyleSheet, AsyncStorage, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import * as Permissions from 'expo-permissions';
 import { CommonActions } from '@react-navigation/native';
 
 
@@ -17,12 +16,12 @@ export default class AppScan extends React.Component{
   }
 
   componentDidMount() {
-    async () => {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
       this.setState({
         hasPermission: status === 'granted',
       });
-    };
+    })();
     AsyncStorage.getItem('DATA').then((theDATA)=>{
       const data = JSON.parse(theDATA);
       this.setState({DATA:data});
@@ -66,7 +65,6 @@ export default class AppScan extends React.Component{
     );
   }
   render(){
-
     const { navigation, route } = this.props;
     return (
       <View
@@ -92,12 +90,6 @@ export default class AppScan extends React.Component{
                   const cart  = [];
                   cart.push(i);
                   AsyncStorage.setItem('cart',JSON.stringify(cart));
-                  // navigation.reset({
-                  //     index: 0,
-                  //     routes: [{ name: 'Home' }],
-                  // });
-                  // navigation.navigate("Cart");
-                  //
                   navigation.dispatch(
                     CommonActions.reset({
                       index: 1,
@@ -112,11 +104,6 @@ export default class AppScan extends React.Component{
                   const cart = JSON.parse(datacart);
                   cart.push(i);
                   AsyncStorage.setItem('cart',JSON.stringify(cart));
-                  // navigation.reset({
-                  //     index: 0,
-                  //     routes: [{ name: 'Home' }],
-                  // });
-                  // navigation.navigate("Cart");
                   navigation.dispatch(
                     CommonActions.reset({
                       index: 1,

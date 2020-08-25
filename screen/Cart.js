@@ -1,17 +1,15 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity, Image, FlatList, AsyncStorage, ImageBackground } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, FlatList, AsyncStorage, ImageBackground } from 'react-native';
 import ListItem from './ListItem';
 import ScanMoreIcon from '../icon/view_add.png';
 import NumberFormat from 'react-number-format';
 import BackgroundImg from '../img/bg.jpg';
 
 
-class Cart extends React.Component {
+export default class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // products: [...props.route.params.products, props.route.params.i],
-      // products: [props.route.params.i],
       products: [],
       number: 1,
     };
@@ -41,7 +39,6 @@ class Cart extends React.Component {
       console.log(err);
     });
   }
-
 
   render(){
     const { navigation } = this.props;
@@ -135,4 +132,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Cart;

@@ -39,7 +39,7 @@ import BackgroundImg from '../img/bg.jpg';
 // ];
 // AsyncStorage.setItem('DATA',JSON.stringify(DATA));
 
-class HomeScreen extends React.Component{
+export default class HomeScreen extends React.Component{
   reset = async () => {
     try {
       await AsyncStorage.setItem('cart', '');
@@ -96,5 +96,3 @@ const styles = StyleSheet.create({
 });
 
 
-
-export default HomeScreen;
