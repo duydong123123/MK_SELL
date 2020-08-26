@@ -66,8 +66,8 @@ export default class EditItem extends React.Component{
         }
       }
     }
-    let check_ProductList = this.props.navigation.dangerouslyGetState().routes.filter(item => (item.name == "ProductList"));
-    if(check_ProductList.length){
+    let checkProductList = this.props.navigation.dangerouslyGetState().routes.filter(item => (item.name == "ProductList"));
+    if(checkProductList.length){
       this.props.navigation.dispatch(
         CommonActions.reset({
           index: 1,

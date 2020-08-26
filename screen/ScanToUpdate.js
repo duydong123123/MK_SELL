@@ -80,8 +80,8 @@ export default class AppScan extends React.Component{
         this.setState({
           scanned: true
         });
-        let _strDATA = JSON.stringify(this.state.DATA);
-        if (_strDATA.includes(data) == false){
+        let checkInclude = this.state.DATA.filter(item => (item.barCode == data));
+        if (checkInclude.length == 0){
           this._alertNoData(data);
         }
         else{
