@@ -2,8 +2,25 @@ import React from 'react';
 import { View } from 'react-native';
 import AppNavigator from './screen/AppNavigator';
 import FlashMessage from "react-native-flash-message";
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
-class App extends React.Component {
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasPermission: null,
+    };
+  }
+
+  componentDidMount() {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      this.setState({
+        hasPermission: status === 'granted',
+      });
+    })();
+  }
+
   render(){
     return (
       <View style={{ flex: 1 }}>
@@ -14,4 +31,3 @@ class App extends React.Component {
   }
 }
 
-export default App;
