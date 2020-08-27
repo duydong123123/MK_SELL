@@ -23,8 +23,10 @@ export default class AppScan extends React.Component{
       });
     })();
     AsyncStorage.getItem('DATA').then((theDATA)=>{
-      const data = JSON.parse(theDATA);
-      this.setState({DATA:data});
+      if (theDATA){
+        let data = JSON.parse(theDATA);
+        this.setState({DATA:data});
+      }
     })
     .catch((err)=>{
       console.log(err);
@@ -65,7 +67,7 @@ export default class AppScan extends React.Component{
     );
   }
   render(){
-    const { navigation, route } = this.props;
+    const { navigation } = this.props;
     return (
       <View
       style={{
@@ -78,6 +80,7 @@ export default class AppScan extends React.Component{
         this.setState({
           scanned: true
         });
+        // Check if this barcode have data
         let checkInclude = this.state.DATA.filter(item => (item.barCode == data));
         if (checkInclude.length == 0){
           this._alertNoData(data);
@@ -86,6 +89,7 @@ export default class AppScan extends React.Component{
           for(let i of this.state.DATA){
             if (data == i.barCode) {
               AsyncStorage.getItem('cart').then((datacart)=>{
+                // Check if cart is empty
                 if (datacart == null){
                   const cart  = [];
                   cart.push(i);
@@ -100,7 +104,8 @@ export default class AppScan extends React.Component{
                     })
                   );
                 }
-                else if (datacart.includes(data) == false) {
+                // Check if this barcode not in cart
+                else if (JSON.parse(datacart).filter(item => (item.barCode == data)).length == 0) {
                   const cart = JSON.parse(datacart);
                   cart.push(i);
                   AsyncStorage.setItem('cart',JSON.stringify(cart));
@@ -114,6 +119,7 @@ export default class AppScan extends React.Component{
                     })
                   );
                 }
+                // This barcode already in cart
                 else {
                   this._alertSame(i.itemName);
                 }

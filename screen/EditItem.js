@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput, AsyncStorage, KeyboardAvoidingView, Platform } from 'react-native';
 import BackgroundImg from '../img/bg.jpg';
 import { TextInputMask } from 'react-native-masked-text';
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
 import { CommonActions } from '@react-navigation/native';
 
 export default class EditItem extends React.Component{
@@ -117,8 +117,10 @@ export default class EditItem extends React.Component{
 
   componentDidMount() {
     AsyncStorage.getItem('DATA').then((theDATA)=>{
-      const data = JSON.parse(theDATA);
-      this.setState({DATA:data});
+      if (theDATA){
+        const data = JSON.parse(theDATA);
+        this.setState({DATA:data});
+      }
     })
     .catch((err)=>{
       console.log(err);
@@ -126,7 +128,6 @@ export default class EditItem extends React.Component{
   }
 
   render(){
-    const { navigation } = this.props;
     return (
       <ImageBackground source={BackgroundImg} style={styles.bgimg}>
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.container}>

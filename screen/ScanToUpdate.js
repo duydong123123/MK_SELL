@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Button, AsyncStorage, Alert } from 'react-native';
+import { View, StyleSheet, AsyncStorage, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Permissions from 'expo-permissions';
 
@@ -9,7 +9,6 @@ export default class AppScan extends React.Component{
     super(props);
     this.state = {
       hasPermission: null,
-      numberCompare: 0,
       scanned: false,
       DATA: []
     };
@@ -23,8 +22,10 @@ export default class AppScan extends React.Component{
       });
     };
     AsyncStorage.getItem('DATA').then((theDATA)=>{
-      const data = JSON.parse(theDATA);
-      this.setState({DATA:data});
+      if (theDATA){
+        let data = JSON.parse(theDATA);
+        this.setState({DATA:data});
+      }
     })
     .catch((err)=>{
       console.log(err);

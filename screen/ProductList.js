@@ -47,8 +47,10 @@ export default class ProductList extends React.Component{
 
   componentDidMount(){
     AsyncStorage.getItem('DATA').then((theDATA)=>{
-      let data = JSON.parse(theDATA);
-      this.setState({DATA:data});
+      if (theDATA){
+        let data = JSON.parse(theDATA);
+        this.setState({DATA:data});
+      }
     })
     .catch((err)=>{
       console.log(err);

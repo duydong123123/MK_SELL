@@ -16,7 +16,7 @@ export default class Cart extends React.Component {
   }
 
   onSubtract = (item, index) => {
-    const products = [...this.state.products];
+    let products = [...this.state.products];
     products[index].quantity -= 1;
     if (products[index].quantity == 0){
       products.splice(index, 1);
@@ -25,15 +25,17 @@ export default class Cart extends React.Component {
   };
 
   onAdd = (item, index) => {
-    const products = [...this.state.products];
+    let products = [...this.state.products];
     products[index].quantity += 1;
     this.setState({ products });
   };
 
   componentDidMount(){
-    AsyncStorage.getItem('cart').then((cart)=>{
-      const products = JSON.parse(cart);
-      this.setState({products:products});
+    AsyncStorage.getItem('cart').then((theCart)=>{
+      if (theCart){
+        let products = JSON.parse(theCart);
+        this.setState({products:products});
+      }
     })
     .catch((err)=>{
       console.log(err);
@@ -43,9 +45,11 @@ export default class Cart extends React.Component {
   render(){
     const { navigation } = this.props;
     let totalPrice = 0;
-    this.state.products.forEach((item) => {
-      totalPrice += item.quantity * item.price;
-    });
+    if (this.state.products){
+      this.state.products.forEach((item) => {
+        totalPrice += item.quantity * item.price;
+      });
+    }
     return (
       <ImageBackground source={BackgroundImg} style={styles.bgimg}>
         <View style={{flex:1, justifyContent:"space-between"}}>
