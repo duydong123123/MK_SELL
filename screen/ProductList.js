@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, FlatL
 import BackgroundImg from '../img/bg.jpg';
 import SearchIcon from '../icon/search-icon.png';
 import NumberFormat from 'react-number-format';
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
 
 export default class ProductList extends React.Component{
   constructor(props) {

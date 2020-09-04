@@ -11,7 +11,6 @@ export default class Cart extends React.Component {
     super(props);
     this.state = {
       products: [],
-      number: 1,
     };
   }
 

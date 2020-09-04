@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./icon/app_icon.png",
     "splash": {
@@ -25,8 +25,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.mk.mk_sell",
-      "versionCode": 1
+      "package": "com.mk.mk_sell"
     }
   }
 }

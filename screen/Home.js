@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Image, AsyncStorage, ImageBac
 import ScanImg from '../icon/scan.png';
 import UpdateImg from '../icon/update.png';
 import BackgroundImg from '../img/bg.jpg';
+import Import_ExportImg from '../icon/import_export.png';
 
 // const DATA = [
 // {
@@ -61,6 +62,11 @@ export default class HomeScreen extends React.Component{
             <TouchableOpacity style = {styles.btn} onPress={() => navigation.navigate('ProductList')}>
                 <Image style = {{width: 64, height: 64}} source = {UpdateImg} />
                 <Text style = {{fontSize: 20, color: '#FC5B31', fontWeight: "bold"}}>Thêm/Cập nhật giá</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style = {styles.btn} onPress={() => navigation.navigate('Import_Export')}>
+                <Image style = {{width: 64, height: 64}} source = {Import_ExportImg} />
+                <Text style = {{fontSize: 20, color: '#FC5B31', fontWeight: "bold"}}>Nhập/xuất dữ liệu</Text>
             </TouchableOpacity>
         </View>
       </ImageBackground>
