@@ -17,7 +17,7 @@ export default class EditItem extends React.Component{
   }
 
   pressDone = () => {
-    let new_Item = {barCode: this.state._barcode, itemName: this.state._name, price: this.state._price, quantity: 1};
+    let new_Item = {barCode: this.state._barcode, itemName: this.state._name, price: this.state._price};
     if (this.state.DATA == null){
       let updateDATA = [new_Item];
       AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));

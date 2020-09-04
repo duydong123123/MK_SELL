@@ -54,8 +54,8 @@ export default class AppScan extends React.Component{
       `Mã vạch ${barcode} chưa có trong danh sách, cập nhật giá ngay?`,
       [
         { text: "Cập nhật", onPress: () => {
-          let new_Item = {barCode: barcode, itemName: "", price: ""};
-          this.props.navigation.navigate("EditItem", {item: new_Item});
+          let newItem = {barCode: barcode, itemName: "", price: ""};
+          this.props.navigation.navigate("EditItem", {item: newItem});
         } },
         { text: "Không", onPress: () => {
           this.setState({
@@ -92,7 +92,8 @@ export default class AppScan extends React.Component{
                 // Check if cart is empty
                 if (datacart == null){
                   const cart  = [];
-                  cart.push(i);
+                  let newCartItem = Object.assign({}, i, {"quantity": 1});
+                  cart.push(newCartItem);
                   AsyncStorage.setItem('cart',JSON.stringify(cart));
                   navigation.dispatch(
                     CommonActions.reset({
@@ -107,7 +108,8 @@ export default class AppScan extends React.Component{
                 // Check if this barcode not in cart
                 else if (JSON.parse(datacart).filter(item => (item.barCode == data)).length == 0) {
                   const cart = JSON.parse(datacart);
-                  cart.push(i);
+                  let newCartItem = Object.assign({}, i, {"quantity": 1});
+                  cart.push(newCartItem);
                   AsyncStorage.setItem('cart',JSON.stringify(cart));
                   navigation.dispatch(
                     CommonActions.reset({

@@ -9,32 +9,27 @@ import Import_ExportImg from '../icon/import_export.png';
 // {
 //   barCode: '640509040147',
 //   itemName: 'First Item',
-//   price: 12000,
-//   quantity: 1
+//   price: 12000
 // },
 // {
 //   barCode: '5901234123457',
 //   itemName: 'Second Item',
-//   price: 200000,
-//   quantity: 1
+//   price: 200000
 // },
 // {
 //   barCode: '5012345678900',
 //   itemName: 'Third Item',
-//   price: 20000,
-//   quantity: 1
+//   price: 20000
 // },
 // {
 //   barCode: '725272730706',
 //   itemName: 'Fourth Item',
-//   price: 40000,
-//   quantity: 1
+//   price: 40000
 // },
 // {
 //   barCode: '3033710076789',
 //   itemName: 'Fifth Item',
-//   price: 50000,
-//   quantity: 1
+//   price: 50000
 // },
 
 // ];
