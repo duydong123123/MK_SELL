@@ -4,6 +4,7 @@ import BackgroundImg from '../img/bg.jpg';
 import SearchIcon from '../icon/search-icon.png';
 import NumberFormat from 'react-number-format';
 import { showMessage } from "react-native-flash-message";
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default class ProductList extends React.Component{
   constructor(props) {
@@ -31,7 +32,7 @@ export default class ProductList extends React.Component{
       `Xoá ${item.itemName} ra khỏi danh sách?`,
       [
         { text: "Xoá", onPress: () => {
-          let updateDATA = this.state.DATA.filter((thisItem) => thisItem.barCode != item.barCode);
+          let updateDATA = this.state.DATA.filter((thisItem) => thisItem.id != item.id);
           AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
           showMessage({
             message: "Đã xoá một sản phẩm!",
@@ -73,8 +74,9 @@ export default class ProductList extends React.Component{
                 <Image style = {{width: 32, height: 32,}} source = {SearchIcon} />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={{backgroundColor: "#2196F3", borderRadius: 5}} onPress={()=>{navigation.navigate("ScanToUpdate")}}>
-              <Text style={{color: "white", fontSize: 20, padding: 5,}}>Quét mã</Text>
+            <TouchableOpacity style={{backgroundColor: "#2196F3", borderRadius: 5, justifyContent: "center", alignItems: "center"}} onPress={()=>{navigation.navigate("ScanToUpdate")}}>
+              <MaterialIcons name="add" size={20} color="white"/>
+              <Text style={{color: "white", fontSize: 12, paddingHorizontal: 5,}}>THÊM</Text>
             </TouchableOpacity>
           </View>
           <FlatList style={{margin: 10}}
@@ -98,7 +100,7 @@ export default class ProductList extends React.Component{
                 </TouchableOpacity>
               </View>
             )}
-            keyExtractor={item => item.barCode}
+            keyExtractor={item => `${item.id}`}
           />
         </View>
       </ImageBackground>

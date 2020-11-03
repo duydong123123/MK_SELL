@@ -6,27 +6,32 @@ import BackgroundImg from '../img/bg.jpg';
 import Import_ExportImg from '../icon/import_export.png';
 
 // const DATA = [
-// {
+// { 
+//   id: 192546264264,
 //   barCode: '640509040147',
 //   itemName: 'First Item',
-//   price: 12000
+//   price: 12000,
 // },
 // {
+//   id: 19254626452,
 //   barCode: '5901234123457',
 //   itemName: 'Second Item',
 //   price: 200000
 // },
 // {
+//   id: 192546264254,
 //   barCode: '5012345678900',
 //   itemName: 'Third Item',
 //   price: 20000
 // },
 // {
+//   id: 192546264154,
 //   barCode: '725272730706',
 //   itemName: 'Fourth Item',
 //   price: 40000
 // },
 // {
+//   id: 192546264789596,
 //   barCode: '3033710076789',
 //   itemName: 'Fifth Item',
 //   price: 50000
@@ -51,7 +56,7 @@ export default class HomeScreen extends React.Component{
         <View style={styles.container}>
             <TouchableOpacity style = {styles.btn} onPress={() => {this.reset(); navigation.navigate('AppScan')}}>
                 <Image style = {{width: 64, height: 64}} source = {ScanImg} />
-                <Text style = {{fontSize: 20, color: '#FC5B31', fontWeight: "bold"}}>Quét mã</Text>
+                <Text style = {{fontSize: 20, color: '#FC5B31', fontWeight: "bold"}}>Mua hàng</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style = {styles.btn} onPress={() => navigation.navigate('ProductList')}>

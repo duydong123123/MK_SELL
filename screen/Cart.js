@@ -60,7 +60,7 @@ export default class Cart extends React.Component {
                                              onAdd={() => this.onAdd(item, index)}
                                             />
                         }
-            keyExtractor={item => item.barCode}
+            keyExtractor={item => `${item.id}`}
           />
           <View style = {styles.bot}>
             <View style={styles.left_bot}>

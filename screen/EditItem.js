@@ -9,6 +9,7 @@ export default class EditItem extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      _id: this.props.route.params.item.id,
       _barcode: this.props.route.params.item.barCode,
       _name: this.props.route.params.item.itemName,
       _price: this.props.route.params.item.price,
@@ -17,7 +18,7 @@ export default class EditItem extends React.Component{
   }
 
   pressDone = () => {
-    let new_Item = {barCode: this.state._barcode, itemName: this.state._name, price: this.state._price};
+    let new_Item = {id: this.state._id, barCode: this.state._barcode, itemName: this.state._name, price: this.state._price};
     if (this.state.DATA == null){
       let updateDATA = [new_Item];
       AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
@@ -27,8 +28,9 @@ export default class EditItem extends React.Component{
       });
     }
     else {
-      let _strDATA = JSON.stringify(this.state.DATA);
-      if (_strDATA.includes(JSON.stringify(new_Item.barCode)) == false){
+      // let _strDATA = JSON.stringify(this.state.DATA);
+      // if (_strDATA.includes(JSON.stringify(new_Item.id)) == false){
+      if (this.state.DATA.filter(item => (item.id==new_Item.id)).length == 0){
         let updateDATA = [...this.state.DATA,new_Item];
         AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
         showMessage({
@@ -38,7 +40,7 @@ export default class EditItem extends React.Component{
       }
       else{
         if (new_Item.itemName == this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
-          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
+          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.id != this.props.route.params.item.id);
           let updateDATA = [...afterRemoveItem,new_Item];
           AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
           showMessage({
@@ -47,7 +49,7 @@ export default class EditItem extends React.Component{
           });
         }
         if (new_Item.itemName != this.props.route.params.item.itemName && new_Item.price == this.props.route.params.item.price){
-          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
+          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.id != this.props.route.params.item.id);
           let updateDATA = [...afterRemoveItem,new_Item];
           AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
           showMessage({
@@ -56,7 +58,7 @@ export default class EditItem extends React.Component{
           });
         }
         if (new_Item.itemName != this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
-          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.barCode != this.props.route.params.item.barCode);
+          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.id != this.props.route.params.item.id);
           let updateDATA = [...afterRemoveItem,new_Item];
           AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
           showMessage({
