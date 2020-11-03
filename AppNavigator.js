@@ -2,14 +2,14 @@ import React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AppScan from './AppScan';
-import HomeScreen from './Home';
-import ScanToUpdate from './ScanToUpdate';
-import Cart from './Cart';
-import ProductList from './ProductList';
-import CheckOut from './CheckOut';
-import EditItem from './EditItem';
-import Import_Export from './Import_Export';
+import AppScan from './screen/AppScan';
+import HomeScreen from './screen/Home';
+import ScanToUpdate from './screen/ScanToUpdate';
+import Cart from './screen/Cart';
+import ProductList from './screen/ProductList';
+import CheckOut from './screen/CheckOut';
+import EditItem from './screen/EditItem';
+import Import_Export from './screen/Import_Export';
 
 const Stack = createStackNavigator();
 

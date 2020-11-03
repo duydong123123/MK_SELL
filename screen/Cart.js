@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, FlatList, AsyncStorage, ImageBackground } from 'react-native';
-import ListItem from './ListItem';
+import ListItem from '../components/CartListItem';
 import ScanMoreIcon from '../icon/view_add.png';
 import NumberFormat from 'react-number-format';
 import BackgroundImg from '../img/bg.jpg';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import AppNavigator from './screen/AppNavigator';
+import AppNavigator from './AppNavigator';
 import FlashMessage from "react-native-flash-message";
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
