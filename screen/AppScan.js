@@ -183,6 +183,11 @@ export default class AppScan extends React.Component{
 
         {/* View for select no barcode item */}
         <Animated.View style={[styles.container, {marginBottom: this.state.marginAnim}]}>
+          {noBarcodeDATA.length == 0 ? (
+            <Text>Chưa thêm sản phẩm nào</Text>
+          ):(
+            <View></View>
+          )}
           <FlatList style={{marginVertical: 10}}
             numColumns={2}
             data={noBarcodeDATA}

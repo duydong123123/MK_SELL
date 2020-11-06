@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput, AsyncStorage, KeyboardAvoidingView, Platform } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, TextInput, AsyncStorage, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import BackgroundImg from '../img/bg.jpg';
 import { TextInputMask } from 'react-native-masked-text';
 import { showMessage } from "react-native-flash-message";
@@ -19,101 +19,117 @@ export default class EditItem extends React.Component{
 
   pressDone = () => {
     let new_Item = {id: this.state._id, barCode: this.state._barcode, itemName: this.state._name, price: this.state._price};
-    if (this.state.DATA == null){
-      let updateDATA = [new_Item];
-      AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
-      showMessage({
-        message: "Đã thêm một sản phẩm mới!",
-        type: "success",
-      });
+    if (new_Item.price == "" || new_Item.itemName == ""){
+      Alert.alert(
+        "Chưa nhập đủ thông tin",
+        "Vui lòng điền đầy đủ thông tin sản phẩm.",
+        [
+          { text: "OK", onPress: () => {} }
+        ],
+        { cancelable: false }
+      );
     }
-    else {
-      // let _strDATA = JSON.stringify(this.state.DATA);
-      // if (_strDATA.includes(JSON.stringify(new_Item.id)) == false){
-      if (this.state.DATA.filter(item => (item.id==new_Item.id)).length == 0){
-        let updateDATA = [...this.state.DATA,new_Item];
+    else{
+      if (this.state.DATA == null){
+        let updateDATA = [new_Item];
         AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
         showMessage({
           message: "Đã thêm một sản phẩm mới!",
           type: "success",
         });
       }
-      else{
-        if (new_Item.itemName == this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
-          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.id != this.props.route.params.item.id);
-          let updateDATA = [...afterRemoveItem,new_Item];
+      else {
+        // let _strDATA = JSON.stringify(this.state.DATA);
+        // if (_strDATA.includes(JSON.stringify(new_Item.id)) == false){
+        if (this.state.DATA.filter(item => (item.id==new_Item.id)).length == 0){
+          let updateDATA = [...this.state.DATA,new_Item];
           AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
           showMessage({
-            message: `Thay đổi giá sản phẩm: ${this.props.route.params.item.itemName}`,
-            type: "info",
+            message: "Đã thêm một sản phẩm mới!",
+            type: "success",
           });
-        }
-        if (new_Item.itemName != this.props.route.params.item.itemName && new_Item.price == this.props.route.params.item.price){
-          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.id != this.props.route.params.item.id);
-          let updateDATA = [...afterRemoveItem,new_Item];
-          AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
-          showMessage({
-            message: `Thay đổi tên sản phẩm: ${this.props.route.params.item.itemName} -> ${new_Item.itemName}`,
-            type: "info",
-          });
-        }
-        if (new_Item.itemName != this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
-          let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.id != this.props.route.params.item.id);
-          let updateDATA = [...afterRemoveItem,new_Item];
-          AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
-          showMessage({
-            message: `Thay đổi tên và giá sản phẩm`,
-            type: "info",
-          });
-        }
-      }
-    }
-    let checkProductList = this.props.navigation.dangerouslyGetState().routes.filter(item => (item.name == "ProductList"));
-    if(checkProductList.length){
-      this.props.navigation.dispatch(
-        CommonActions.reset({
-          index: 1,
-          routes: [
-            { name: 'Home' },
-            { name: 'ProductList' },
-          ],
-        })
-      );
-    }
-    else{
-      AsyncStorage.getItem('cart').then((datacart)=>{
-        if (datacart == null){
-          const cart  = [];
-          cart.push(new_Item);
-          AsyncStorage.setItem('cart',JSON.stringify(cart));
-          this.props.navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                { name: 'Home' },
-                { name: 'Cart' },
-              ],
-            })
-          );
         }
         else{
-          const cart = JSON.parse(datacart);
-          cart.push(new_Item);
-          AsyncStorage.setItem('cart',JSON.stringify(cart));
-          this.props.navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                { name: 'Home' },
-                { name: 'Cart' },
-              ],
-            })
-          );
+          if (new_Item.itemName == this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
+            let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.id != this.props.route.params.item.id);
+            let updateDATA = [...afterRemoveItem,new_Item];
+            AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
+            showMessage({
+              message: `Thay đổi giá sản phẩm: ${this.props.route.params.item.itemName}`,
+              type: "info",
+            });
+          }
+          if (new_Item.itemName != this.props.route.params.item.itemName && new_Item.price == this.props.route.params.item.price){
+            let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.id != this.props.route.params.item.id);
+            let updateDATA = [...afterRemoveItem,new_Item];
+            AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
+            showMessage({
+              message: `Thay đổi tên sản phẩm: ${this.props.route.params.item.itemName} -> ${new_Item.itemName}`,
+              type: "info",
+            });
+          }
+          if (new_Item.itemName != this.props.route.params.item.itemName && new_Item.price != this.props.route.params.item.price){
+            let afterRemoveItem = this.state.DATA.filter((thisItem) => thisItem.id != this.props.route.params.item.id);
+            let updateDATA = [...afterRemoveItem,new_Item];
+            AsyncStorage.setItem('DATA',JSON.stringify(updateDATA));
+            showMessage({
+              message: `Thay đổi tên và giá sản phẩm`,
+              type: "info",
+            });
+          }
         }
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
+      }
+      let checkProductList = this.props.navigation.dangerouslyGetState().routes.filter(item => (item.name == "ProductList"));
+      if(checkProductList.length){
+        this.props.navigation.dispatch(
+          CommonActions.reset({
+            index: 1,
+            routes: [
+              { name: 'Home' },
+              { name: 'ProductList' },
+            ],
+          })
+        );
+      }
+      else{
+        AsyncStorage.getItem('cart').then((datacart)=>{          
+          // Check if cart is empty
+          if (datacart == null){
+            const cart  = [];
+            let newCartItem = Object.assign({}, new_Item, {"quantity": 1});
+            cart.push(newCartItem);
+            AsyncStorage.setItem('cart',JSON.stringify(cart));
+            this.props.navigation.dispatch(
+              CommonActions.reset({
+                index: 1,
+                routes: [
+                  { name: 'Home' },
+                  { name: 'Cart' },
+                ],
+              })
+            );        
+          }          
+          else{
+            // Cart not empty
+            const cart = JSON.parse(datacart);
+            let newCartItem = Object.assign({}, new_Item, {"quantity": 1});
+            cart.push(newCartItem);
+            AsyncStorage.setItem('cart',JSON.stringify(cart));
+            this.props.navigation.dispatch(
+              CommonActions.reset({
+                index: 1,
+                routes: [
+                  { name: 'Home' },
+                  { name: 'Cart' },
+                ],
+              })
+            );
+          }
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      }
     }
   }
 
