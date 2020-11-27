@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, FlatList, AsyncStorage, TextInput, Alert } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground, FlatList, AsyncStorage, TextInput, Alert, SafeAreaView, ScrollView } from 'react-native';
 import BackgroundImg from '../img/bg.jpg';
 import SearchIcon from '../icon/search-icon.png';
 import NumberFormat from 'react-number-format';
@@ -46,6 +46,36 @@ export default class ProductList extends React.Component{
     );
   }
 
+  headerNoBarcode= () => {
+    if (this.state.DATA.filter(item=>item.barCode == "").length > 0){
+      return(
+        <View style={styles.headerStyle}>
+          <Text style={styles.titleStyle}>Sản phẩm không có mã vạch</Text>
+        </View>
+      );
+    }
+    else{
+      return(
+        <View></View>
+      );
+    }
+  }
+
+  headerBarcode= () => {
+    if (this.state.DATA.filter(item=>item.barCode != "").length > 0){
+      return(
+        <View style={styles.headerStyle}>
+          <Text style={styles.titleStyle}>Sản phẩm có mã vạch</Text>
+        </View>
+      );
+    }
+    else{
+      return(
+        <View></View>
+      );
+    }    
+  }
+
   componentDidMount(){
     AsyncStorage.getItem('DATA').then((theDATA)=>{
       if (theDATA){
@@ -79,29 +109,60 @@ export default class ProductList extends React.Component{
               <Text style={{color: "white", fontSize: 12, paddingHorizontal: 5,}}>THÊM</Text>
             </TouchableOpacity>
           </View>
-          <FlatList style={{margin: 10}}
-            data={this.state.DATA}
-            renderItem={({item, index}) => (
-              <View style={styles.item}>
-                <TouchableOpacity style={{flex: 1}} onPress={()=>{navigation.navigate("EditItem",{ item, index })}}>
-                  <Text style={styles.title}>{item.itemName}</Text>
-                  <Text style={styles.sub}>Mã vạch: {item.barCode}</Text>
-                  <NumberFormat
-                    value={item.price}
-                    displayType={'text'}
-                    thousandSeparator='.'
-                    decimalSeparator=","
-                    suffix={' đ'}
-                    renderText={formattedValue => <Text style ={styles.sub}>Đơn giá: {formattedValue}</Text>}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.delete} onPress={()=>{this.pressDelete(item)}}>
-                  <Text style={{ padding: 10, fontSize: 15, color: "white"}}>Xoá</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            keyExtractor={item => `${item.id}`}
-          />
+          <SafeAreaView style={{flex:1, margin: 10}}>
+            <ScrollView>
+              <FlatList style={{marginVertical: 5}}
+                data={this.state.DATA.filter(item=>item.barCode == "")}
+                ListHeaderComponent={this.headerNoBarcode}
+                stickyHeaderIndices={[0]}
+                renderItem={({item, index}) => (
+                  <View style={styles.item}>
+                    <TouchableOpacity style={{flex: 1}} onPress={()=>{navigation.navigate("EditItem",{ item, index })}}>
+                      <Text style={styles.title}>{item.itemName}</Text>
+                      <Text style={styles.sub}>Mã vạch: {item.barCode}</Text>
+                      <NumberFormat
+                        value={item.price}
+                        displayType={'text'}
+                        thousandSeparator='.'
+                        decimalSeparator=","
+                        suffix={' đ'}
+                        renderText={formattedValue => <Text style ={styles.sub}>Đơn giá: {formattedValue}</Text>}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.delete} onPress={()=>{this.pressDelete(item)}}>
+                      <Text style={{ padding: 10, fontSize: 15, color: "white"}}>Xoá</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+                keyExtractor={item => `${item.id}`}
+              />
+              <FlatList style={{marginVertical: 5}}
+                data={this.state.DATA.filter(item=>item.barCode != "")}
+                ListHeaderComponent={this.headerBarcode}
+                stickyHeaderIndices={[0]}
+                renderItem={({item, index}) => (
+                  <View style={styles.item}>
+                    <TouchableOpacity style={{flex: 1}} onPress={()=>{navigation.navigate("EditItem",{ item, index })}}>
+                      <Text style={styles.title}>{item.itemName}</Text>
+                      <Text style={styles.sub}>Mã vạch: {item.barCode}</Text>
+                      <NumberFormat
+                        value={item.price}
+                        displayType={'text'}
+                        thousandSeparator='.'
+                        decimalSeparator=","
+                        suffix={' đ'}
+                        renderText={formattedValue => <Text style ={styles.sub}>Đơn giá: {formattedValue}</Text>}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.delete} onPress={()=>{this.pressDelete(item)}}>
+                      <Text style={{ padding: 10, fontSize: 15, color: "white"}}>Xoá</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+                keyExtractor={item => `${item.id}`}
+              />
+            </ScrollView>
+          </SafeAreaView>
         </View>
       </ImageBackground>
     );
@@ -169,6 +230,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginVertical: 8,
   },
+  headerStyle: {
+    flex: 1,
+    height: 40,
+    width: '100%',
+    backgroundColor: 'brown',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titleStyle: {
+    color: 'white',
+    fontWeight: "bold",
+    fontSize: 16
+  }
 });
 
 
